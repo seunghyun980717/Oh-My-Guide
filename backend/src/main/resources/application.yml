@@ -1,0 +1,104 @@
+spring:
+  application:
+    name: oh-my-guide
+  config:
+    import: "optional:file:.env[.properties]"
+
+  # PostgreSQL
+  datasource:
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+
+  # Redis
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+
+  # Kafka
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    consumer:
+      group-id: ${KAFKA_GROUP_ID}
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      concurrency: ${KAFKA_LISTENER_CONCURRENCY:1}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+  # OAuth2
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID:abcdefd}
+            client-secret: ${GOOGLE_CLIENT_SECRET:qwdwdqdqwdqwdqwd}
+            redirect-uri: ${BASE_URL:http://localhost:8080}/oauth2/callback/google
+            scope:
+              - email
+              - profile
+
+
+app:
+  auth:
+    tokenSecret: ${TOKEN_SECRET}
+    tokenExpirationMsec: ${TOKEN_EXPIRE:3000000}
+  cors:
+    allowedOrigins: ${CORS_URL:http://localhost:3000}
+  oauth2:
+    authorizedRedirectUris: ${AUTHORIZED_REDIRECT_URIS:http://localhost:8080/oauth2/redirect,myandroidapp://oauth2/redirect}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus
+
+  metrics:
+    tags:
+      # 모든 메트릭에 application 레이블 추가 (Grafana 대시보드 필터링용)
+      application: ${spring.application.name}
+      namespace: ${NAMESPACE:local}
+
+server:
+port: 8080
+
+ai:
+  server:
+    url: ${AI_SERVER_URL:http://localhost:8000}
+
+tour-api:
+  service-key: ${TOUR_API_KEY}
+  base-url: https://apis.data.go.kr/B551011/KorService2
+
+hdfs:
+  uri: hdfs://${HDFS_HOST:localhost}:${HDFS_PORT:9000}
+  user: ${HDFS_USER:root}
+
+livy:
+  url: ${LIVY_URL:http://localhost:8998}
+
+spark:
+  job:
+    app-resource: file:///opt/spark-jobs/analyze_logs.py
+    db-host: ${SPARK_DB_HOST:}
+    jars: file:///opt/spark-jobs/postgresql-42.7.4.jar
+  schedule:
+    enabled: ${SPARK_SCHEDULE_ENABLED:false}
+    cron: ${SPARK_SCHEDULE_CRON:0 0 4 * * *}

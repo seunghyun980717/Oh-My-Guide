@@ -1,0 +1,32 @@
+# IDE and tool directories
+.agents
+.claude
+.idea
+
+# environment variables
+.env
+.env.*
+!.env.example
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# dependencies
+node_modules/
+
+# build outputs
+dist/
+
+# TypeScript compiled outputs in source dirs
+test/mapsapitest/src/**/*.js
+test/mapsapitest/src/**/*.js.map
+test/mapsapitest/src/**/*.d.ts
+test/mapsapitest/src/**/*.d.ts.map
+
+CLAUDE.md
+
+# Claude Code
+.claude/
+docker-compose.app.local.yml
