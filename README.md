@@ -98,7 +98,7 @@
 | **Infra** | 전준완 |
 
 ## 시스템 아키텍처
-![스크린샷_2026-03-30_024925](/uploads/218a30d4c94672981172b3c9266859fb/스크린샷_2026-03-30_024925.png){width=900 height=546}
+![architecture](screenshots/architecture.png){width=900 height=546}
 
 ## ERD
-![image](/uploads/fd9638b7732a76201df938ff354b5881/image.png){width=681 height=459}
+![erd](screenshots/10_erd.png){width=681 height=459}
