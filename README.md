@@ -93,12 +93,12 @@
 | 역할 | 이름 |
 |------|------|
 | **Frontend** | 이승연, 표경보 |
-| **Backend** | 송성현, 전준완, 정승현 |
+| **Backend** | 정승현, 전준완, 송성현 |
 | **AI** | 이정현 |
 | **Infra** | 전준완 |
 
 ## 시스템 아키텍처
-![architecture](screenshots/architecture.png){width=900 height=546}
+![architecture](screenshots/architecture.png)
 
 ## ERD
-![erd](screenshots/10_erd.png){width=681 height=459}
+![erd](screenshots/10_erd.png)
